@@ -12,7 +12,7 @@ public class UserRepository {
 
     }
 
-    public User findById(String id) {
+    User findById(String id) {
         for (User user :
                 users) {
             if (user.getId().equals(id)) {
