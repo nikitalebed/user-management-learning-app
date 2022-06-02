@@ -1,5 +1,6 @@
 import java.util.Objects;
 
+// TASK 1: не забывай удалять не используемые импорты
 public class User {
 
     private final String id;

@@ -9,14 +9,19 @@ class Demo {
 
     public static void main(String[] args) {
 
+        // TASK 1: в методе мейн оставь только запрос от пользователя ввести ID и вызов UserService
+        // С помощью цикла while реализуй программу которая будет бесконечно запрашивать ID пока не напечатаешь слово EXIT
         try {
             Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // когда нужно выполнить запрос с параметром (у тебя это id) то используй PreparedStatement
             Statement statement = connection.createStatement();
             System.out.println("Connection successful, created access-to-BD object.");
 
             Scanner sc = new Scanner(System.in);
             System.out.println("Finding users by ID... \nWrite ID in next line:");
             String searchingId = sc.nextLine();
+
             ResultSet resultSet = statement.executeQuery("SELECT* FROM users WHERE id='"+searchingId+"'");
 
             while (resultSet.next()){
