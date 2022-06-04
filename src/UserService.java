@@ -1,5 +1,3 @@
-import java.sql.SQLException;
-
 // TASK 1: Переиспользуй этот класс
 // добавь обработку исключений на случай если пользователя нет в базе по такому айдишнику
 
@@ -19,6 +17,12 @@ public class UserService {
             throw new UserNotFoundException();
         }
         return user;
+    }
+    public void setCheckedNewUser (String login, String password){
+        userRepository.newUser(login, password);
+        if (login == null & password == null){
+            throw new UserNotFoundException();
+        }
     }
 }
 

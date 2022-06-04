@@ -7,23 +7,87 @@ import java.util.Scanner;
 
 class Demo {
 
+    static Scanner scanner = new Scanner(System.in);
+    static UserService userService = new UserService();
+
     public static void main(String[] args) {
 
-        while (true) {
-            UserService userService = new UserService();
-            System.out.println("Type id of the user you’re looking for");
-            Scanner scanner = new Scanner(System.in);
-            var userInput = scanner.nextLine();
-            if (userInput.equals("Exit")) {
-                return;
+        do {
+            displayMenu();
+            int option = scanner.nextInt();
+            if (option == 1) {
+                addUser();
+            } else if (option == 2) {
+                findUserById();
+            } else if (option == 3) {
+                System.out.println("Exiting...");
+                break;
             }
-            int id = Integer.parseInt(userInput.trim());
-            System.out.println("Searching by ID: " + userInput);
-            User user = userService.searchById(id);
-            System.out.println("user found: " + user);
-        }
+        } while (true);
+    }
+    static void displayMenu () {
+        System.out.println();
+        System.out.println("1 - Add user");
+        System.out.println("2 - Find user by ID");
+        System.out.println("3 - Exit");
+        System.out.println("Option:");
+        System.out.println();
+    }
+    static void addUser () {
+        System.out.println("Type new user`s login");
+        var userLogin = scanner.next();
+        System.out.println("Type new user`s password");
+        var userPassword = scanner.next();
+        System.out.println("New user registered");
+        userService.setCheckedNewUser(userLogin, userPassword);
+    }
+    static void findUserById () {
+        System.out.println("Type id of the user you’re looking for");
+        var id = scanner.nextInt();
+        System.out.println("Searching by ID: " + id);
+        User user = userService.searchById(id);
+        System.out.println("user found: " + user);
     }
 }
+
+//        while (true) {
+//            System.out.println("Type id of the user you’re looking for");
+//            Scanner scanner = new Scanner(System.in);
+//            var userInput = scanner.nextLine();
+//            if (userInput.equals("Exit")) {
+//                return;
+//            }
+//            int id = Integer.parseInt(userInput.trim());
+//            System.out.println("Searching by ID: " + userInput);
+//            User user = userService.searchById(id);
+//            System.out.println("user found: " + user);
+//        }
+//        while (true) {
+//            System.out.println("Set login and password to create new user");
+//            Scanner sc = new Scanner(System.in);
+//            var setUser = sc.nextLine();
+//            if (setUser.equals("Exit")){
+//                return;
+//            }
+//        }
+
+
+//правка 5
+//UserService userService = new UserService();
+//
+//
+//        while (true) {
+//                System.out.println("Type id of the user you’re looking for");
+//                Scanner scanner = new Scanner(System.in);
+//                var userInput = scanner.nextLine();
+//                if (userInput.equals("Exit")) {
+//                return;
+//                }
+//                int id = Integer.parseInt(userInput.trim());
+//                System.out.println("Searching by ID: " + userInput);
+//                User user = userService.searchById(id);
+//                System.out.println("user found: " + user);
+//                }
 
 // мой вариант вывода
 //        while (true) {

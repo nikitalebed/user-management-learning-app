@@ -10,12 +10,13 @@ public class UserRepository {
     static final String DB_URL = "jdbc:postgresql://localhost:5433/postgres";
     static final String USER = "postgres";
     static final String PASS = "200604";
-    static final String SQL = "SELECT * FROM users WHERE id=?";
+    static final String SQL_FIND_BY_ID = "SELECT * FROM users WHERE id=?";
+    static final String SQL_INSERT_NEW_USER = "insert into users (login, password) values (?,?)";
 
     public User findById(int id) {
         User user = null;
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_BY_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -27,6 +28,17 @@ public class UserRepository {
             e.printStackTrace();
         }
         return user;
+    }
+    public void newUser (String login, String password){
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_NEW_USER)) {
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(2, password);
+            preparedStatement.addBatch();
+            preparedStatement.executeBatch();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 }
 
