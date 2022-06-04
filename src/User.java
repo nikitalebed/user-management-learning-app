@@ -1,19 +1,16 @@
-import java.util.Objects;
-
-// TASK 1: не забывай удалять не используемые импорты
 public class User {
 
-    private final String id;
+    private final int id;
     private final String login;
     private final String password;
 
-    public User(String id, String login, String password) {
+    public User(int id, String login, String password) {
         this.id = id;
         this.login = login;
         this.password = password;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
